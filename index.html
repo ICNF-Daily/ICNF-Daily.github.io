@@ -10,6 +10,7 @@
     </script>
   </head>
   <script>
+    
     function fetchRSSFeed() {
       var element = document.getElementById("rss_feed");
       var feed = new google.feeds.Feed(element.dataset.feed);     
@@ -24,7 +25,7 @@
       if (!result.error) {
         var entries = result.feed.entries;
         for (var i = 0; i < entries.length; i++) {
-          html += "<li><a href='https://www.us-cert.gov/ncas/all.xml" + entries[i].link + "'target='https://www.us-cert.gov/ncas/all.xml'>" + entries[i].title + "</a></li>"
+          html += "<li><a href='" + entries[i].link + "'target='_blank'>" + entries[i].title + "</a></li>"
         }
       } else {
         html = "Error: " + result.error.message;
@@ -40,9 +41,8 @@
 
   <body>
     <div id="rss_feed" 
-         data-feed="https://www.us-cert.gov/ncas/all.xml" 
+         data-feed="http://feeds.labnol.org/labnol" 
          data-count="12">Loading RSS Feed..</div>
   </body>
 
 </html>
-
