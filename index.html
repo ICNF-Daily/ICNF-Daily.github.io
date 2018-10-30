@@ -10,7 +10,7 @@
     </script>
   </head>
   <script>
-    
+    <style type="text/css"  media="all">
     function fetchRSSFeed() {
       var element = document.getElementById("rss_feed");
       var feed = new google.feeds.Feed(element.dataset.feed);     
@@ -37,6 +37,7 @@
     window.onload = function() {
       fetchRSSFeed();
     }
+    </style>
   </script>
 
   <body>
