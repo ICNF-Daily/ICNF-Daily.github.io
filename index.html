@@ -1,53 +1,51 @@
-<BODY>
-    <script language="JavaScript" src="http://feed2js.org//feed2js.php?src=https%3A%2F%2Fwww.us-cert.gov%2Fncas%2Fall.xml&chan=y&num=12&date=y&utf=y&html=a"  charset="UTF-8" type="text/javascript"></script>
+<!DOCTYPE html>
+<html>
 
-    <noscript>
-      <a href="http://feed2js.org//feed2js.php?src=https%3A%2F%2Fwww.us-cert.gov%2Fncas%2Fall.xml&chan=y&num=12&date=y&utf=y&html=y">View RSS feed</a>
-    </noscript>
+  <head>
+    <meta charset="utf-8">
+    <title>Show RSS Feed</title>
+    <script src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("feeds", "1")
+    </script>
+  </head>
+  <script>
+    
+    function fetchRSSFeed() {
+      var element = document.getElementById("rss_feed");
+      var feed = new google.feeds.Feed(element.dataset.feed);     
+      feed.setNumEntries(element.dataset.count);
+      feed.load(showRSSFeed);
+    }
 
-<style type="text/css"  media="all">  
-  /* begin styles for RSS Feed */
-  
+    function showRSSFeed(result) {
 
-.rss-box {
-	 margin: 1em;
-	 width: 180px;
-	 background-color: white;
-	 border: 1px solid red;
-	 
-}
-.rss-items {
-	margin-top:0px;
-	padding:0.5em; 0.5em;
-	margin-left:0px;
-	color red;
-}
-p.rss-title {padding:0.5em;}
-.rss-title {
-	font-size: 8pt;
-	background-color: red;
-	color: white;
-	font-weight:bold;
-	text-align: left;
-}
+      var html = "";
 
-.rss-item  {
-  font-size: 7pt;
-  list-style:none;
-  padding-bottom:1em;
-}
+      if (!result.error) {
+        var entries = result.feed.entries;
+        for (var i = 0; i < entries.length; i++) {
+          html += "<li><a href='" + entries[i].link + "'target='_blank'>" + entries[i].title + "</a></li>"
+        }
+      } else {
+        html = "Error: " + result.error.message;
+      }
 
-.rss-item a {
-	color:red;
-	font-size: 9pt;
-	font-weight:bold;
-	}
-	
-.rss-item a:visited {
-	color: red;
-}
+      document.getElementById("rss_feed").innerHTML = "<ul>" + html + "</ul>";
+    }
 
-.rss-date {
+    window.onload = function() {
+      fetchRSSFeed();
+    }
+  </script>
+
+  <body>
+    <div id="rss_feed" 
+         data-feed="http://feeds.labnol.org/labnol" 
+         data-count="12">Loading RSS Feed..</div>
+  </body>
+
+</html>
 	font-size: 7pt;
 	color: red;
 	}
