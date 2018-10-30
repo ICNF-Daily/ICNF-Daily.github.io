@@ -10,7 +10,6 @@
     </script>
   </head>
   <script>
-    <style type="text/css"  media="all">
     function fetchRSSFeed() {
       var element = document.getElementById("rss_feed");
       var feed = new google.feeds.Feed(element.dataset.feed);     
@@ -37,12 +36,11 @@
     window.onload = function() {
       fetchRSSFeed();
     }
-    </style>
   </script>
 
   <body>
     <div id="rss_feed" 
-         data-feed="http://feeds.labnol.org/labnol" 
+         data-feed="https://www.us-cert.gov/ncas/all.xml" 
          data-count="12">Loading RSS Feed..</div>
   </body>
 
